@@ -1,1 +1,0 @@
-Reemplaza este archivo/carpeta con tu modelo 3D real en formato .glb y llámalo hamburguesa.glb.

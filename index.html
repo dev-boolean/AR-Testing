@@ -1,37 +1,215 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Menú AR</title>
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <style>
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui;background:#111;color:white}
-    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px;text-align:center}
-    h1{font-size:42px;margin:0 0 10px}.card{width:min(520px,100%);background:#222;border-radius:24px;padding:18px}
-    model-viewer{width:100%;height:55vh;min-height:360px;background:#181818;border-radius:18px}
-    .btn{display:inline-block;margin-top:16px;padding:15px 22px;border-radius:14px;background:white;color:#111;text-decoration:none;font-weight:700}
-    p{color:#bbb}.price{font-size:24px;font-weight:700}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>La Terraza — Menú AR</title>
+<meta name="description" content="Menú digital con visualización de cada platillo en realidad aumentada sobre tu mesa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+(function loadModelViewer() {
+  var pkg = 'model-viewer';
+  var ver = '3.5.0';
+  var s = document.createElement('script');
+  s.type = 'module';
+  s.src = 'https://cdn.jsdelivr.net/npm/@google/' + pkg + '@' + ver + '/dist/model-viewer.min.js';
+  document.head.appendChild(s);
+})();
+</script>
 </head>
 <body>
-<div class="hero">
-  <div class="card">
-    <h1 id="name">🍔 Hamburguesa AR</h1>
-    <p id="description">Modelo 3D de demostración. En un teléfono compatible puedes abrir la experiencia AR.</p>
-    <model-viewer
-      src="models/hamburguer.glb"
-      alt="Hamburguesa en 3D"
-      camera-controls
-      auto-rotate
-      ar
-      ar-modes="webxr scene-viewer quick-look"
-      shadow-intensity="1"
-      exposure="1">
-    </model-viewer>
-    <div class="price">$25.000 COP</div>
-    <a class="btn" href="https://modelviewer.dev/" target="_blank">Información AR</a>
-  </div>
+
+<header class="hero">
+  <p class="hero-eyebrow">Menú digital · Edición AR</p>
+  <h1 class="hero-title">La Terraza</h1>
+  <p class="hero-sub">Toca cualquier platillo y ponlo sobre tu propia mesa en realidad aumentada antes de pedirlo.</p>
+</header>
+
+<div class="ar-hint">
+  <span class="ar-hint-icon" aria-hidden="true">📱</span>
+  <span>Abre esta página desde tu celular. En cada platillo, toca <strong>“Ver en AR”</strong> — en Android abre la cámara al instante; en iPhone puedes rotar el modelo en 3D.</span>
 </div>
+
+<main class="menu">
+
+  <section class="category">
+    <h2 class="category-title">Entradas</h2>
+
+    <details class="dish" name="dish-group">
+      <summary class="dish-summary">
+        <span class="dish-emoji" aria-hidden="true">🌮</span>
+        <span class="dish-info">
+          <span class="dish-name">Tacos al Pastor</span>
+          <span class="dish-desc">Tortilla de maíz, cerdo marinado al achiote, piña, cilantro y cebolla.</span>
+        </span>
+        <span class="dish-price">$24.000</span>
+      </summary>
+      <div class="dish-viewer">
+        <model-viewer
+          src="models/taco.glb"
+          alt="Modelo 3D de Tacos al Pastor"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          exposure="1.1"
+          loading="lazy">
+          <button slot="ar-button" class="ar-button">Ver en tu mesa (AR)</button>
+          <div slot="progress-bar" class="progress-bar"><div class="progress-bar-fill"></div></div>
+        </model-viewer>
+      </div>
+    </details>
+
+    <details class="dish" name="dish-group">
+      <summary class="dish-summary">
+        <span class="dish-emoji" aria-hidden="true">🥗</span>
+        <span class="dish-info">
+          <span class="dish-name">Ensalada César</span>
+          <span class="dish-desc">Lechuga romana, parmesano, crotones caseros y aderezo césar.</span>
+        </span>
+        <span class="dish-price">$21.000</span>
+      </summary>
+      <div class="dish-viewer">
+        <model-viewer
+          src="models/salad.glb"
+          alt="Modelo 3D de Ensalada César"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          exposure="1.1"
+          loading="lazy">
+          <button slot="ar-button" class="ar-button">Ver en tu mesa (AR)</button>
+          <div slot="progress-bar" class="progress-bar"><div class="progress-bar-fill"></div></div>
+        </model-viewer>
+      </div>
+    </details>
+
+    <details class="dish" name="dish-group">
+      <summary class="dish-summary">
+        <span class="dish-emoji" aria-hidden="true">🍣</span>
+        <span class="dish-info">
+          <span class="dish-name">Maki de Salmón</span>
+          <span class="dish-desc">Salmón fresco, arroz de sushi, alga nori y aguacate.</span>
+        </span>
+        <span class="dish-price">$29.000</span>
+      </summary>
+      <div class="dish-viewer">
+        <model-viewer
+          src="models/maki-salmon.glb"
+          alt="Modelo 3D de Maki de Salmón"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          exposure="1.1"
+          loading="lazy">
+          <button slot="ar-button" class="ar-button">Ver en tu mesa (AR)</button>
+          <div slot="progress-bar" class="progress-bar"><div class="progress-bar-fill"></div></div>
+        </model-viewer>
+      </div>
+    </details>
+  </section>
+
+  <section class="category">
+    <h2 class="category-title">Fuertes</h2>
+
+    <details class="dish" name="dish-group">
+      <summary class="dish-summary">
+        <span class="dish-emoji" aria-hidden="true">🍔</span>
+        <span class="dish-info">
+          <span class="dish-name">Burger Doble con Queso</span>
+          <span class="dish-desc">Doble carne, doble queso cheddar y pan brioche tostado.</span>
+        </span>
+        <span class="dish-price">$32.000</span>
+      </summary>
+      <div class="dish-viewer">
+        <model-viewer
+          src="models/burger-cheese-double.glb"
+          alt="Modelo 3D de Burger Doble con Queso"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          exposure="1.1"
+          loading="lazy">
+          <button slot="ar-button" class="ar-button">Ver en tu mesa (AR)</button>
+          <div slot="progress-bar" class="progress-bar"><div class="progress-bar-fill"></div></div>
+        </model-viewer>
+      </div>
+    </details>
+
+    <details class="dish" name="dish-group">
+      <summary class="dish-summary">
+        <span class="dish-emoji" aria-hidden="true">🍕</span>
+        <span class="dish-info">
+          <span class="dish-name">Pizza Margarita</span>
+          <span class="dish-desc">Masa artesanal, salsa de tomate, mozzarella fresca y albahaca.</span>
+        </span>
+        <span class="dish-price">$38.000</span>
+      </summary>
+      <div class="dish-viewer">
+        <model-viewer
+          src="models/pizza.glb"
+          alt="Modelo 3D de Pizza Margarita"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          exposure="1.1"
+          loading="lazy">
+          <button slot="ar-button" class="ar-button">Ver en tu mesa (AR)</button>
+          <div slot="progress-bar" class="progress-bar"><div class="progress-bar-fill"></div></div>
+        </model-viewer>
+      </div>
+    </details>
+  </section>
+
+  <section class="category">
+    <h2 class="category-title">Postres</h2>
+
+    <details class="dish" name="dish-group">
+      <summary class="dish-summary">
+        <span class="dish-emoji" aria-hidden="true">🍰</span>
+        <span class="dish-info">
+          <span class="dish-name">Pastel de Chocolate</span>
+          <span class="dish-desc">Bizcocho húmedo de chocolate con ganache y frutos rojos.</span>
+        </span>
+        <span class="dish-price">$18.000</span>
+      </summary>
+      <div class="dish-viewer">
+        <model-viewer
+          src="models/cake.glb"
+          alt="Modelo 3D de Pastel de Chocolate"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          exposure="1.1"
+          loading="lazy">
+          <button slot="ar-button" class="ar-button">Ver en tu mesa (AR)</button>
+          <div slot="progress-bar" class="progress-bar"><div class="progress-bar-fill"></div></div>
+        </model-viewer>
+      </div>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Prototipo de menú AR construido con <a href="https://modelviewer.dev" target="_blank" rel="noopener">&lt;model-viewer&gt;</a>.</p>
+  <p>Modelos 3D: <a href="https://kenney.nl/assets/food-kit" target="_blank" rel="noopener">Food Kit por Kenney</a> (CC0).</p>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
